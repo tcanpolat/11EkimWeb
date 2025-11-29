@@ -1,1 +1,1 @@
-# 11EkimWeb
+# 11 Ekim Web .NET CORE Örnekleri
