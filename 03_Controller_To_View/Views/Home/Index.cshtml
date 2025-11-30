@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<ul>
+    @foreach(var product in (List<string>)ViewData["products"])
+    {
+        <li>@product</li>
+    }
+</ul>
