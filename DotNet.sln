@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_View_To_Controller", "04
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05_ViewBag_ViewData_TempData", "05_ViewBag_ViewData_TempData\05_ViewBag_ViewData_TempData.csproj", "{BC10E9E1-0F61-49BC-816A-934A84902CFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06_ModelsExample", "06_ModelsExample\06_ModelsExample.csproj", "{84F10645-F050-4E24-9E42-CD77E1B366DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07_HtmlHelper_Models", "07_HtmlHelper_Models\07_HtmlHelper_Models.csproj", "{61562CFA-CB89-4FCB-9F80-CF414E3B1997}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{BC10E9E1-0F61-49BC-816A-934A84902CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC10E9E1-0F61-49BC-816A-934A84902CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC10E9E1-0F61-49BC-816A-934A84902CFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84F10645-F050-4E24-9E42-CD77E1B366DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84F10645-F050-4E24-9E42-CD77E1B366DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84F10645-F050-4E24-9E42-CD77E1B366DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84F10645-F050-4E24-9E42-CD77E1B366DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61562CFA-CB89-4FCB-9F80-CF414E3B1997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61562CFA-CB89-4FCB-9F80-CF414E3B1997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61562CFA-CB89-4FCB-9F80-CF414E3B1997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61562CFA-CB89-4FCB-9F80-CF414E3B1997}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
