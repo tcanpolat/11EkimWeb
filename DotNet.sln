@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03_Controller_To_View", "03
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04_View_To_Controller", "04_View_To_Controller\04_View_To_Controller.csproj", "{B3980BC9-BCA1-468B-903C-F0ED85F737A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05_ViewBag_ViewData_TempData", "05_ViewBag_ViewData_TempData\05_ViewBag_ViewData_TempData.csproj", "{BC10E9E1-0F61-49BC-816A-934A84902CFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B3980BC9-BCA1-468B-903C-F0ED85F737A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3980BC9-BCA1-468B-903C-F0ED85F737A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3980BC9-BCA1-468B-903C-F0ED85F737A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC10E9E1-0F61-49BC-816A-934A84902CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC10E9E1-0F61-49BC-816A-934A84902CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC10E9E1-0F61-49BC-816A-934A84902CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC10E9E1-0F61-49BC-816A-934A84902CFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

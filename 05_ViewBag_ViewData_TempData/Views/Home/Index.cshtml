@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    @ViewBag.ad 
+    <br />
+    @ViewBag.sonuc
+    <br />
+    @foreach (var item in ViewBag.liste)
+    {
+        <span>@item</span>
+    }
+    <br />
+    @ViewData["ad"]
+</div>
