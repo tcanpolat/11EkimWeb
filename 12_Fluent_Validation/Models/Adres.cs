@@ -1,4 +1,6 @@
-﻿namespace _12_Fluent_Validation.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace _12_Fluent_Validation.Models
 {
     public class Adres
     {
