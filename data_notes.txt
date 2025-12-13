@@ -1,0 +1,3 @@
+Ado.Net => Eski bir yöntem code first kullanıyoruz. Daha çok sorgular yazılıyor. 
+Dapper => Mini ORM aracı. Code first yok. Fakat çok hızlı bir orm aracı.
+Entity Framework Core => ORM aracı. Code First var. Linq methodlarıyla sql sorguları sağlanabiliyor. En sık kullanılan Orm araçlarından biridir. 
