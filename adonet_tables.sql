@@ -1,0 +1,5 @@
+SELECT TOP (1000) [ID]
+      ,[FirstName]
+      ,[LastName]
+      ,[Age]
+  FROM [SchoolDB].[dbo].[Students]
