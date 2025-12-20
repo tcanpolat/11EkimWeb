@@ -1,0 +1,19 @@
+﻿@model IEnumerable<dynamic>
+<h1>Öğrenci ve Ders Bilgileri</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Öğrenci Adı</th>
+            <th>Kurs Adı</th>      
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.StudentName</td>
+                <td>@item.CourseTitle</td>
+            </tr>
+        }
+    </tbody>
+</table>
