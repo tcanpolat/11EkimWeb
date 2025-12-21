@@ -1,6 +1,9 @@
 using _19_EntityFrameworkExample.Data;
+using _19_EntityFrameworkExample.Extensions;
 using _19_EntityFrameworkExample.Models;
 using _19_EntityFrameworkExample.ViewModels;
+using EFCore.BulkExtensions;
+using ExcelDataReader;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
@@ -193,7 +196,120 @@ namespace _19_EntityFrameworkExample.Controllers
                 .ToList();
             return View(groupedStudents);
         }
+
+        // Bazý db iþleri için özel methodlar yazmamýz gerekebilir. Bunlara custom extension method denir.
+        // Öðrencilerin yaþ aralýklýðýna göre gruplayan method.
+        public IActionResult CustomExtensionMethod()
+        {
+            var students = _context.Students.ToList();  
+            var groupedStudentsByAge = students.GroupByAgeRange(); // Extension method çaðrýsý
+            return View(groupedStudentsByAge);
+        }
+
+        public IActionResult GetStudentsByDepartment()
+        {
+            return View();
+        }
+
+        // Sql tarafýnda oluþturduðumuz stored procedure'ü çaðýrmak için FromSqlInterpolated kullanýyoruz
+        // FromSqlInterpolated, SQL sorgularýný doðrudan Entity Framework Core ile çalýþtýrmak için kullanýlýr ve SQL enjeksiyon saldýrýlarýna karþý koruma saðlar.
+        [HttpPost]
+        public IActionResult GetStudentsByDepartment(string department)
+        {
+            var students = _context.Students
+                            .FromSqlInterpolated($"EXEC GetStudentsByDepartment {department}")
+                            .ToList();
+            ViewData["Students"] = students;
+            return View(); 
+        }
+
+        // RawSql kullanýmý. RawSql, SQL sorgularýný doðrudan Entity Framework Core ile çalýþtýrmak için kullanýlýr ancak SQL enjeksiyon saldýrýlarýna karþý koruma saðlamaz.
+        public IActionResult RawSql()
+        {
+            var students = _context.Students
+                            .FromSqlRaw("SELECT * FROM Students WHERE Age > 20")
+                            .ToList();
+            return View("Index", students);
+        }
+        // Javascript tarafýndan Ajax isteði ile çaðýrýlacak Transaction örneði
+        // Transaction: Bir dizi veritabaný iþleminin tek bir birim olarak ele alýndýðý bir konsepttir.
+        // Eðer iþlemlerden biri baþarýsýz olursa, tüm iþlemler geri alýnýr (rollback).
+        // Bu, veritabanýnýn tutarlýlýðýný saðlar.
+        [HttpPost]
+        public IActionResult AddStudentsByTransaction([FromBody] List<Student> students)
+        {
+            var transaction = _context.Database.BeginTransaction();
+
+            try
+            {
+                _context.Students.AddRange(students);
+                _context.SaveChanges();
+                // throw new Exception("Hata"); // test için kayýt edilmediðini görebiliriz.
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                return StatusCode(500, "Öðrenciler Eklenirken bir hata oluþtu");
+            }
+            return Ok();
+        }
+
+        public IActionResult BulkInsert()
+        {
+            var students = new List<Student>
+            {
+                new Student { Name = "Ayþe" , Age = 45, Department = "Tekstil"},
+                new Student { Name = "Melih" , Age = 25, Department = "Elektronik"},
+                new Student { Name = "Efe" , Age = 32, Department = "Bilgisayar"}
+            };
+
+            _context.BulkInsert(students);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult ExcelBulkInsert(IFormFile file)
+        {
+            if (file == null || file.Length == 0) return BadRequest("Dosya seçilmedi.");
+
+            var students = new List<Student>();
+
+            // Excel dosyasýný okumak için Stream açýyoruz
+            using (var stream = file.OpenReadStream())
+            {
+                // Kod sayfasýný desteklemek için (Özellikle Türkçe karakterler için önemli)
+                System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                {
+                    // Ýlk satýrýn baþlýk olduðunu varsayýyoruz, o yüzden okuyup geçiyoruz
+                    reader.Read();
+
+                    while (reader.Read()) // Satýr satýr oku
+                    {
+                        students.Add(new Student
+                        {
+                            Name = reader.GetValue(0)?.ToString(),       // A Sütunu
+                            Age = Convert.ToInt32(reader.GetValue(1)),   // B Sütunu
+                            Department = reader.GetValue(2)?.ToString()  // C Sütunu
+                        });
+                    }
+                }
+            }
+
+            // Veritabanýna toplu ekleme iþlemi
+            if (students.Any())
+            {
+                _context.BulkInsert(students);  
+            }
+
+            List<Student> studentList = _context.Students.ToList();
+
+            return View("Index", studentList);
+        }
     }
 
-   
+
 }

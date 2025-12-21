@@ -1,0 +1,28 @@
+﻿@model IDictionary<string,List<Student>>
+
+<h1>Öğrenci Listesi - Yaş Aralığına göre grupla</h1>
+<div class="text-center">
+    @foreach(var group in Model)
+    {
+        <h2>@group.Key</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ad</th>
+                    <th>Yaş</th>
+                    <th>Bölüm</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var student in group.Value)
+                {
+                    <tr>
+                        <td>@student.Name</td>
+                        <td>@student.Age</td>
+                        <td>@student.Department</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
